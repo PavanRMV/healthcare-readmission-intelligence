@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "sub_dq",
+  "position": {
+    "x": 35,
+    "y": 68,
+    "z": 1000,
+    "height": 36,
+    "width": 1210
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Refresh controls, coverage metrics, and curated source inventory. County context excludes blank/ambiguous keys before aggregation.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#52677B"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

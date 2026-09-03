@@ -1,0 +1,179 @@
+{
+  "readmission_by_measure": [
+    {
+      "measure_id": "READM_30_AMI",
+      "rows": 4790,
+      "available": 1971,
+      "completeness_pct": 41.1,
+      "mean_score": 14.39,
+      "weighted_score": 14.35,
+      "total_denominator": 459524
+    },
+    {
+      "measure_id": "READM_30_CABG",
+      "rows": 4790,
+      "available": 938,
+      "completeness_pct": 19.6,
+      "mean_score": 11.06,
+      "weighted_score": 10.9,
+      "total_denominator": 126395
+    },
+    {
+      "measure_id": "READM_30_COPD",
+      "rows": 4790,
+      "available": 3086,
+      "completeness_pct": 64.4,
+      "mean_score": 19.9,
+      "weighted_score": 20.04,
+      "total_denominator": 515451
+    },
+    {
+      "measure_id": "READM_30_HF",
+      "rows": 4790,
+      "available": 3253,
+      "completeness_pct": 67.9,
+      "mean_score": 21.38,
+      "weighted_score": 21.3,
+      "total_denominator": 1392167
+    },
+    {
+      "measure_id": "READM_30_HIP_KNEE",
+      "rows": 4790,
+      "available": 1695,
+      "completeness_pct": 35.4,
+      "mean_score": 5.83,
+      "weighted_score": 5.55,
+      "total_denominator": 210031
+    },
+    {
+      "measure_id": "READM_30_PN",
+      "rows": 4790,
+      "available": 3758,
+      "completeness_pct": 78.5,
+      "mean_score": 17.34,
+      "weighted_score": 17.47,
+      "total_denominator": 1444430
+    }
+  ],
+  "high_state_measure_descriptive": [
+    {
+      "state": "PR",
+      "measure_id": "READM_30_HF",
+      "available": 40,
+      "mean_score": 23.29,
+      "denominator": 10376
+    },
+    {
+      "state": "WV",
+      "measure_id": "READM_30_HF",
+      "available": 37,
+      "mean_score": 22.1,
+      "denominator": 10772
+    },
+    {
+      "state": "MA",
+      "measure_id": "READM_30_HF",
+      "available": 53,
+      "mean_score": 22.03,
+      "denominator": 36479
+    },
+    {
+      "state": "NY",
+      "measure_id": "READM_30_HF",
+      "available": 137,
+      "mean_score": 21.89,
+      "denominator": 78545
+    },
+    {
+      "state": "NH",
+      "measure_id": "READM_30_HF",
+      "available": 23,
+      "mean_score": 21.86,
+      "denominator": 6248
+    }
+  ],
+  "highest_modeled_county_estimates_population_ge_10000": [
+    {
+      "measure_id": "BPHIGH",
+      "state": "MS",
+      "county": "Holmes",
+      "data_value": 53.1,
+      "low_ci": 48.3,
+      "high_ci": 57.6,
+      "population": 15777,
+      "value_type": "AgeAdjPrv"
+    },
+    {
+      "measure_id": "BPHIGH",
+      "state": "MS",
+      "county": "Coahoma",
+      "data_value": 50.7,
+      "low_ci": 46.0,
+      "high_ci": 55.4,
+      "population": 20077,
+      "value_type": "AgeAdjPrv"
+    },
+    {
+      "measure_id": "BPHIGH",
+      "state": "MS",
+      "county": "Sunflower",
+      "data_value": 49.5,
+      "low_ci": 44.8,
+      "high_ci": 53.9,
+      "population": 24468,
+      "value_type": "AgeAdjPrv"
+    },
+    {
+      "measure_id": "BPHIGH",
+      "state": "MS",
+      "county": "Washington",
+      "data_value": 49.4,
+      "low_ci": 44.8,
+      "high_ci": 53.7,
+      "population": 41946,
+      "value_type": "AgeAdjPrv"
+    },
+    {
+      "measure_id": "BPHIGH",
+      "state": "AL",
+      "county": "Dallas",
+      "data_value": 49.2,
+      "low_ci": 44.7,
+      "high_ci": 53.7,
+      "population": 36165,
+      "value_type": "AgeAdjPrv"
+    },
+    {
+      "measure_id": "BPHIGH",
+      "state": "MS",
+      "county": "Leflore",
+      "data_value": 49.2,
+      "low_ci": 44.9,
+      "high_ci": 53.7,
+      "population": 26378,
+      "value_type": "AgeAdjPrv"
+    },
+    {
+      "measure_id": "BPHIGH",
+      "state": "AL",
+      "county": "Sumter",
+      "data_value": 49.1,
+      "low_ci": 44.5,
+      "high_ci": 53.7,
+      "population": 11727,
+      "value_type": "AgeAdjPrv"
+    }
+  ],
+  "hcahps_completeness": {
+    "rows": 325720,
+    "star_available": 28647,
+    "sample_available": 268532,
+    "response_available": 268532
+  },
+  "hospital_count": 5419,
+  "unmatched_hospitals": 544,
+  "ambiguous_county_hospitals": 28,
+  "safe_joined_hospitals": 4847,
+  "join_coverage_pct": 89.4,
+  "places_latest_year": 2023
+}

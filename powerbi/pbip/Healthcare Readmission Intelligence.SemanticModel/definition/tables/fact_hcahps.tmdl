@@ -1,0 +1,104 @@
+table fact_hcahps
+	lineageTag: 61b5f18c-2d84-457f-bbe8-295ca6bc3d8e
+
+	column facility_id
+		dataType: string
+		lineageTag: 50abf60d-2692-4051-8613-361410e6c44b
+		summarizeBy: none
+		sourceColumn: facility_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_id
+		dataType: string
+		lineageTag: 34243579-bf65-4b40-a1f2-e25954e83216
+		summarizeBy: none
+		sourceColumn: measure_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_name
+		dataType: string
+		lineageTag: 69fd334f-e73c-4620-9f6e-f091f739e185
+		summarizeBy: none
+		sourceColumn: measure_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column answer_description
+		dataType: string
+		lineageTag: c8b7f9f5-4ec8-4732-9acf-5ec329670c26
+		summarizeBy: none
+		sourceColumn: answer_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column score
+		dataType: double
+		lineageTag: 445b2d3b-481e-47e6-a26a-a182212cdf3d
+		summarizeBy: none
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	column answer_percent
+		dataType: double
+		lineageTag: 7785193f-a1ce-4629-8e53-11bc83e88402
+		summarizeBy: none
+		sourceColumn: answer_percent
+
+		annotation SummarizationSetBy = Automatic
+
+	column completed_surveys
+		dataType: double
+		lineageTag: 3c425b31-5d2c-48de-9fb2-594b81904696
+		summarizeBy: none
+		sourceColumn: completed_surveys
+
+		annotation SummarizationSetBy = Automatic
+
+	column response_rate
+		dataType: double
+		lineageTag: 465f33a0-934c-4ebc-b593-4539acd86bda
+		summarizeBy: none
+		sourceColumn: response_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column footnote
+		dataType: string
+		lineageTag: 4db12bb5-3c90-463c-9452-d1190eeca41d
+		summarizeBy: none
+		sourceColumn: footnote
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: string
+		lineageTag: 53d803c2-0d34-4b90-a63d-dc5b56590231
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_date
+		dataType: string
+		lineageTag: 8bf92214-bbb0-4675-aae7-99ad8572c797
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'fact_hcahps Import' = m
+		mode: import
+		source =
+				let
+				    CsvPath = ProjectRoot & "\\outputs\\fact_hcahps.csv",
+				    Source = Csv.Document(File.Contents(CsvPath),[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted,{{"facility_id", type text}, {"measure_id", type text}, {"measure_name", type text}, {"answer_description", type text}, {"score", type number}, {"answer_percent", type number}, {"completed_surveys", type number}, {"response_rate", type number}, {"footnote", type text}, {"start_date", type text}, {"end_date", type text}})
+				    ,Filtered = Table.SelectRows(Typed, each [measure_id] = "H_COMP_1_A_P")
+				in
+				    Filtered
+
+	annotation PBI_ResultType = Table

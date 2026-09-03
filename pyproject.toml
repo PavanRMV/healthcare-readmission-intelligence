@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "healthcare-readmission-intelligence"
+version = "1.0.0"
+description = "Reproducible CMS readmission and CDC PLACES county-risk analytics"
+requires-python = ">=3.11"
+dependencies = ["pandas>=2.2,<4", "requests>=2.31,<3", "matplotlib>=3.8,<4"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+healthcare-etl = "healthcare_intelligence.pipeline:main"
+healthcare-report = "healthcare_intelligence.reporting:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

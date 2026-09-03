@@ -1,0 +1,8 @@
+{
+  "name": "Healthcare Intelligence",
+  "dataColors": ["#176B87", "#64CCC5", "#DAFFFB", "#FFB000", "#B31312"],
+  "background": "#F7F9FC",
+  "foreground": "#16324F",
+  "tableAccent": "#176B87",
+  "visualStyles": {"*": {"*": {"title": [{"fontFamily": "Segoe UI Semibold", "fontSize": 12, "color": {"solid": {"color": "#16324F"}}}]}}}
+}

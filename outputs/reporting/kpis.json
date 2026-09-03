@@ -1,0 +1,20 @@
+{
+  "hospital_count": 5419,
+  "readmission_rows": 28740,
+  "readmission_available": 14701,
+  "readmission_completeness_pct": 51.2,
+  "total_readmission_denominator": 4147998,
+  "unmatched_county_hospitals": 544,
+  "ambiguous_county_hospitals": 28,
+  "safe_county_matched_hospitals": 4847,
+  "county_join_coverage_pct": 89.4,
+  "places_latest_year": 2023,
+  "top_opportunity": {
+    "facility_name": "OROVILLE HOSPITAL",
+    "state": "CA",
+    "measure_id": "READM_30_PN",
+    "score": 25.5,
+    "denominator": 851.0,
+    "gap_to_state": 7.80242214532872
+  }
+}

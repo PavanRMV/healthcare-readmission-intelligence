@@ -1,0 +1,119 @@
+table dim_hospital
+	lineageTag: 2411db13-f92a-42ed-91e2-294e4b1c0a21
+
+	column facility_id
+		dataType: string
+		lineageTag: 8ea99f7b-214c-4d79-9088-f138c65e791b
+		summarizeBy: none
+		sourceColumn: facility_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column facility_name
+		dataType: string
+		lineageTag: c2bc2598-487f-4528-b1a2-7dacdaffb05e
+		summarizeBy: none
+		sourceColumn: facility_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column address
+		dataType: string
+		lineageTag: 93468193-18d3-4c38-a370-23eef202d236
+		summarizeBy: none
+		sourceColumn: address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: ccecaf43-804a-4bab-bc64-bafc1a11330e
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 6d711c01-289b-4026-99d0-56a0bba88dfc
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: string
+		lineageTag: 3072d1fe-7353-4406-bebc-2a291442503f
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column county
+		dataType: string
+		lineageTag: dfbc53ef-a7ab-4fbe-8cb4-9c37448a9524
+		summarizeBy: none
+		sourceColumn: county
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_type
+		dataType: string
+		lineageTag: 21a30f39-1319-4a37-a11d-8e3d487a5520
+		summarizeBy: none
+		sourceColumn: hospital_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column ownership
+		dataType: string
+		lineageTag: 7b78b8a1-c474-42d7-a951-a87c92fdb41b
+		summarizeBy: none
+		sourceColumn: ownership
+
+		annotation SummarizationSetBy = Automatic
+
+	column emergency_services
+		dataType: string
+		lineageTag: 02173ba2-81af-4925-895d-cffc9a7fc914
+		summarizeBy: none
+		sourceColumn: emergency_services
+
+		annotation SummarizationSetBy = Automatic
+
+	column overall_rating
+		dataType: double
+		lineageTag: 183235c3-3324-4555-81ba-d6880eb7f67d
+		summarizeBy: none
+		sourceColumn: overall_rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column readm_measure_count
+		dataType: double
+		lineageTag: 288ae9c9-e338-42b6-bd22-55d00f329e8c
+		summarizeBy: none
+		sourceColumn: readm_measure_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column county_key
+		dataType: string
+		lineageTag: 34e3cad5-d091-4de5-9977-bde57e92c6e2
+		summarizeBy: none
+		sourceColumn: county_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dim_hospital Import' = m
+		mode: import
+		source =
+				let
+				    CsvPath = ProjectRoot & "\\outputs\\dim_hospital.csv",
+				    Source = Csv.Document(File.Contents(CsvPath),[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted,{{"facility_id", type text}, {"facility_name", type text}, {"address", type text}, {"city", type text}, {"state", type text}, {"zip_code", type text}, {"county", type text}, {"hospital_type", type text}, {"ownership", type text}, {"emergency_services", type text}, {"overall_rating", type number}, {"readm_measure_count", type number}, {"county_key", type text}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

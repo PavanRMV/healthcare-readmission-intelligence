@@ -1,0 +1,103 @@
+table fact_readmission
+	lineageTag: abedacf8-eb1a-4b11-b072-98da04b8c5aa
+
+	column facility_id
+		dataType: string
+		lineageTag: 5ba1d770-a69a-4e18-8f1e-41b03724b34b
+		summarizeBy: none
+		sourceColumn: facility_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_id
+		dataType: string
+		lineageTag: 1926fa3f-d567-4446-922a-3d48e81273f5
+		summarizeBy: none
+		sourceColumn: measure_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_name
+		dataType: string
+		lineageTag: f9b29c91-abcb-4f60-b279-2d5a2aebd733
+		summarizeBy: none
+		sourceColumn: measure_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column score
+		dataType: double
+		lineageTag: 28295620-366d-4043-aa5c-f3e3600de56b
+		summarizeBy: none
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	column denominator
+		dataType: double
+		lineageTag: 3ff74d5c-2ee5-4e39-8a08-5b3c1b7acd4a
+		summarizeBy: none
+		sourceColumn: denominator
+
+		annotation SummarizationSetBy = Automatic
+
+	column number_of_patients
+		dataType: double
+		lineageTag: 6f647ee4-798d-4d44-ade2-10fb47b17346
+		summarizeBy: none
+		sourceColumn: number_of_patients
+
+		annotation SummarizationSetBy = Automatic
+
+	column number_returned
+		dataType: double
+		lineageTag: 5664f406-36e6-4ca8-941a-02c212b418fc
+		summarizeBy: none
+		sourceColumn: number_returned
+
+		annotation SummarizationSetBy = Automatic
+
+	column compared_to_national
+		dataType: string
+		lineageTag: e8a5bfa8-d484-444d-8dd1-9a90f6c2abc1
+		summarizeBy: none
+		sourceColumn: compared_to_national
+
+		annotation SummarizationSetBy = Automatic
+
+	column footnote
+		dataType: string
+		lineageTag: d37d197d-e68f-4542-bd38-9e2d29f1ce74
+		summarizeBy: none
+		sourceColumn: footnote
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: string
+		lineageTag: 755b7364-6b17-49bb-8b48-86522481d770
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_date
+		dataType: string
+		lineageTag: 45e67cb2-f8c5-44d5-9a25-e4ffce7bc9ed
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'fact_readmission Import' = m
+		mode: import
+		source =
+				let
+				    CsvPath = ProjectRoot & "\\outputs\\fact_readmission.csv",
+				    Source = Csv.Document(File.Contents(CsvPath),[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted,{{"facility_id", type text}, {"measure_id", type text}, {"measure_name", type text}, {"score", type number}, {"denominator", type number}, {"number_of_patients", type number}, {"number_returned", type number}, {"compared_to_national", type text}, {"footnote", type text}, {"start_date", type text}, {"end_date", type text}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

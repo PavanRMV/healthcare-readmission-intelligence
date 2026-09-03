@@ -1,0 +1,6 @@
+metric,value
+hospital_count,5419
+readmission_rows,28740
+readmission_scores_available,14701
+unmatched_hospitals,544
+ambiguous_county_keys,6

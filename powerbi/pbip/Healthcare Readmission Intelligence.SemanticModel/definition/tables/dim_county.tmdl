@@ -1,0 +1,41 @@
+table dim_county
+	lineageTag: d0192518-3af3-40d2-9b9b-7e72925eefed
+
+	column county_key
+		dataType: string
+		lineageTag: c523e8d2-1e95-46ce-b18f-ae73c15a9441
+		summarizeBy: none
+		sourceColumn: county_key
+
+	column state
+		dataType: string
+		lineageTag: 49fa9a81-736d-40dc-a32d-37e5cd9ad98c
+		summarizeBy: none
+		sourceColumn: state
+
+	column county
+		dataType: string
+		lineageTag: ec4cd1b9-2481-401e-a95c-05104882e96f
+		summarizeBy: none
+		sourceColumn: county
+
+	column county_fips
+		dataType: string
+		lineageTag: f8192e40-4ca7-4c70-954c-152718aef83f
+		summarizeBy: none
+		sourceColumn: county_fips
+
+	partition 'dim_county Import' = m
+		mode: import
+		source =
+				let
+				    CsvPath = ProjectRoot & "\outputs\fact_county_health.csv",
+				    Source = Csv.Document(File.Contents(CsvPath),[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Selected = Table.SelectColumns(Promoted,{"county_key","state","county","county_fips"}),
+				    Valid = Table.SelectRows(Selected, each [county_key] <> null and [county_key] <> ""),
+				    DistinctRows = Table.Distinct(Valid, {"county_key"})
+				in
+				    DistinctRows
+
+	annotation PBI_ResultType = Table

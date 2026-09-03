@@ -1,0 +1,49 @@
+table Metrics
+	lineageTag: 000ae2f3-8852-43e1-8eaa-e09fba41af64
+
+	measure Hospitals = DISTINCTCOUNT(dim_hospital[facility_id])
+		formatString: #,0
+		lineageTag: f4f89fa4-886c-4b97-bea7-63a526646c3b
+
+	measure 'Available Readmission Rows' = COUNT(fact_readmission[score])
+		formatString: #,0
+		lineageTag: 086e05ea-af7e-49e9-a5b9-7996654e8fac
+
+	measure 'HF Readmission Rate' = DIVIDE(CALCULATE(AVERAGE(fact_readmission[score]), KEEPFILTERS(fact_readmission[measure_id] = "READM_30_HF")), 100)
+		formatString: 0.0%
+
+		lineageTag: 29fcf37f-36e2-4173-b57f-a8e63a8f0dad
+
+	measure 'Nurse Communication Always %' = DIVIDE(CALCULATE(AVERAGE(fact_hcahps[answer_percent]), KEEPFILTERS(fact_hcahps[measure_id] = "H_COMP_1_A_P")), 100)
+		formatString: 0.0%
+
+		lineageTag: 4d6f26d0-09ea-4242-9c20-780795c16a8b
+
+	measure 'Completed Surveys (Hospital Grain)' = SUMX(VALUES(dim_hospital[facility_id]), CALCULATE(MAX(fact_hcahps[completed_surveys])))
+		formatString: #,0
+
+		lineageTag: a9ffed1d-304f-4770-a5ed-4f4d4e28c8df
+
+	measure 'Readmission Completeness %' = DIVIDE(COUNT(fact_readmission[score]), COUNTROWS(fact_readmission))
+		formatString: 0.0%
+		lineageTag: d440b24a-c495-45af-b341-849e771c43bd
+
+	measure 'Average Hospital Rating' = AVERAGE(dim_hospital[overall_rating])
+		formatString: 0.0
+		lineageTag: 402a1b87-b78b-4a45-8af0-e4bb1537c2cf
+
+	measure 'Unmatched Hospital Rows' = CALCULATE(MAX('Data Quality'[value]), 'Data Quality'[metric] = "unmatched_hospitals")
+		formatString: #,0
+		lineageTag: 5519faba-a791-454f-b58b-402ae973fe23
+
+	measure 'Hospitals With HCAHPS' = COUNTROWS(FILTER(VALUES(dim_hospital[facility_id]), NOT ISBLANK([Nurse Communication Always %])))
+		formatString: #,0
+		lineageTag: b5b10779-ae01-4f30-81df-6819054392a1
+
+	measure 'Counties With Context' = DISTINCTCOUNT(dim_county[county_key])
+		formatString: #,0
+		lineageTag: b29eadcb-8967-412e-9104-6565b73431c1
+
+	partition Metrics = calculated
+		mode: import
+		source = ROW("_placeholder", 1)

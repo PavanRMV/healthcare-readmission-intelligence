@@ -1,0 +1,112 @@
+table fact_county_health
+	lineageTag: eab45b1a-89ea-45f6-be43-873318783918
+
+	column year
+		dataType: int64
+		lineageTag: 60a8ca8b-0736-4c0e-bd76-b46426de9962
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: fa32ca5c-6f56-4116-86f2-4728804afc3f
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column county
+		dataType: string
+		lineageTag: fd5035be-5a0e-4c1a-aff7-820cdaa3717a
+		summarizeBy: none
+		sourceColumn: county
+
+		annotation SummarizationSetBy = Automatic
+
+	column county_fips
+		dataType: string
+		lineageTag: 3b995ebe-f589-4a3d-8a06-65d94f24f8a5
+		summarizeBy: none
+		sourceColumn: county_fips
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_id
+		dataType: string
+		lineageTag: f65e178e-b13b-46d5-bb21-3f5b701e1bfb
+		summarizeBy: none
+		sourceColumn: measure_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_name
+		dataType: string
+		lineageTag: 84862d76-5ddc-444f-a52d-99e9b8ae2be7
+		summarizeBy: none
+		sourceColumn: measure_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_type
+		dataType: string
+		lineageTag: afc4be88-99a7-4f61-bcd6-c3c91d98118f
+		summarizeBy: none
+		sourceColumn: value_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_value
+		dataType: double
+		lineageTag: 2bdb1d43-8277-41fa-95de-8115238c82f2
+		summarizeBy: none
+		sourceColumn: data_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column low_ci
+		dataType: double
+		lineageTag: 260b722c-6867-4497-b04d-028433c7afdf
+		summarizeBy: none
+		sourceColumn: low_ci
+
+		annotation SummarizationSetBy = Automatic
+
+	column high_ci
+		dataType: double
+		lineageTag: cece7f4a-d6f8-4cb9-b015-c08ee95f245a
+		summarizeBy: none
+		sourceColumn: high_ci
+
+		annotation SummarizationSetBy = Automatic
+
+	column population
+		dataType: int64
+		lineageTag: 30491cb2-5ff6-4383-8576-1710f5a5d6a2
+		summarizeBy: none
+		sourceColumn: population
+
+		annotation SummarizationSetBy = Automatic
+
+	column county_key
+		dataType: string
+		lineageTag: 9f4718b4-b7d6-4596-b800-fd6ae770fe1d
+		summarizeBy: none
+		sourceColumn: county_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'fact_county_health Import' = m
+		mode: import
+		source =
+				let
+				    CsvPath = ProjectRoot & "\\outputs\\fact_county_health.csv",
+				    Source = Csv.Document(File.Contents(CsvPath),[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted,{{"year", Int64.Type}, {"state", type text}, {"county", type text}, {"county_fips", type text}, {"measure_id", type text}, {"measure_name", type text}, {"value_type", type text}, {"data_value", type number}, {"low_ci", type number}, {"high_ci", type number}, {"population", Int64.Type}, {"county_key", type text}})
+				    ,Filtered = Table.SelectRows(Typed, each [county_key] <> null and [county_key] <> "")
+				in
+				    Filtered
+
+	annotation PBI_ResultType = Table

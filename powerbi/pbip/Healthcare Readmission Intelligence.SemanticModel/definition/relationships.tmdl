@@ -1,0 +1,15 @@
+relationship 3ab4ee9b-4003-416e-9776-bf94f0f2d9fe
+	fromColumn: fact_readmission.facility_id
+	toColumn: dim_hospital.facility_id
+
+relationship de0b0c5d-853f-4300-b76f-f71f3f549cfb
+	fromColumn: fact_hcahps.facility_id
+	toColumn: dim_hospital.facility_id
+
+relationship 3c2ea805-f5a9-4cee-9714-82aec1bcb6a9
+	fromColumn: fact_county_health.county_key
+	toColumn: dim_county.county_key
+
+relationship 2759e74c-1a7f-4b43-9939-89135e9f1113
+	fromColumn: dim_hospital.county_key
+	toColumn: dim_county.county_key

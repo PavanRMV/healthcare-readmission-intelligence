@@ -1,0 +1,4 @@
+/// Repository root containing the outputs folder. Update after cloning; no username-specific path is committed.
+expression ProjectRoot = "SET_TO_REPOSITORY_ROOT" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	annotation PBI_ResultType = Text
+

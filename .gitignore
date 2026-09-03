@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+data/raw/*.csv
+data/raw/*.json
+data/warehouse/*.db
+
+# Full fact exports are reproducible and too large for a portfolio repository.
+outputs/*.csv
+!outputs/state_summary.csv
+!outputs/data_quality.csv
+!outputs/source_snapshot.csv
+outputs/_pbip_validation/
+
+# Power BI machine-local caches must never be committed.
+**/.pbi/localSettings.json
+**/.pbi/cache.abf

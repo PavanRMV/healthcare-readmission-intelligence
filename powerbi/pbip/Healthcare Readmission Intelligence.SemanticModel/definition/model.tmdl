@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["ProjectRoot","dim_hospital","dim_county","fact_readmission","fact_hcahps","fact_county_health","Data Quality","Source Snapshot","Metrics"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_hospital
+ref table dim_county
+ref table fact_readmission
+ref table fact_hcahps
+ref table fact_county_health
+ref table 'Data Quality'
+ref table 'Source Snapshot'
+ref table Metrics
+
+ref expression ProjectRoot
+

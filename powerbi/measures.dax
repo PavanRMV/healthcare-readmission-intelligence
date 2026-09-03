@@ -1,0 +1,47 @@
+Hospitals = DISTINCTCOUNT(dim_hospital[facility_id])
+
+Readmission Score (Selected Measure) =
+IF(
+    HASONEVALUE(fact_readmission[measure_id]),
+    AVERAGE(fact_readmission[score]),
+    BLANK()
+)
+
+Readmission Score (Denominator Weighted, Selected Measure) =
+IF(
+    HASONEVALUE(fact_readmission[measure_id]),
+    DIVIDE(
+        SUMX(fact_readmission, fact_readmission[score] * fact_readmission[denominator]),
+        SUM(fact_readmission[denominator])
+    ),
+    BLANK()
+)
+
+Available Readmission Rows = COUNT(fact_readmission[score])
+
+Readmission Completeness % =
+DIVIDE(COUNT(fact_readmission[score]), COUNTROWS(fact_readmission))
+
+Readmission Denominator = SUM(fact_readmission[denominator])
+
+Completed HCAHPS Surveys =
+SUMX(
+    VALUES(dim_hospital[facility_id]),
+    CALCULATE(MAX(fact_hcahps[completed_surveys]))
+)
+
+HCAHPS Response Rate =
+AVERAGEX(
+    VALUES(dim_hospital[facility_id]),
+    CALCULATE(MAX(fact_hcahps[response_rate]))
+)
+
+HCAHPS Summary Star Rating =
+CALCULATE(
+    AVERAGE(fact_hcahps[score]),
+    fact_hcahps[measure_id] = "H_STAR_RATING"
+)
+
+Modeled County Estimate = AVERAGE(fact_county_health[data_value])
+
+Unmatched Hospitals = COUNTROWS(qa_unmatched_hospitals)

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Healthcare Readmission Intelligence"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2be63fa7-08c0-43b0-a857-ef0241b4bf51"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "database": "data\\warehouse\\healthcare.db",
+  "tables": {
+    "state_summary": 336,
+    "hospital_opportunity": 28740,
+    "county_risk": 20706,
+    "joined_model": 187271,
+    "data_quality": 5,
+    "dim_hospital": 5419,
+    "fact_readmission": 28740,
+    "fact_hcahps": 325720,
+    "fact_county_health": 20706,
+    "source_snapshot": 4,
+    "qa_unmatched_hospitals": 544,
+    "qa_ambiguous_county_keys": 42
+  },
+  "hospital_count": 5419,
+  "readmission_rows": 28740,
+  "readmission_score_completeness_pct": 51.15,
+  "places_rows": 20706,
+  "join_safe_matched_hospitals": 4847,
+  "join_unmatched_hospitals": 544,
+  "join_ambiguous_hospitals": 28,
+  "join_coverage_pct": 89.4
+}

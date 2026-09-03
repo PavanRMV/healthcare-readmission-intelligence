@@ -1,0 +1,31 @@
+table 'Data Quality'
+	lineageTag: 9a0a97ac-c768-4944-86d0-794b0e629b64
+
+	column metric
+		dataType: string
+		lineageTag: 5242e0d5-445a-4fd3-bb24-ee36f84baf2b
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		lineageTag: e0362fea-17ad-4364-9b53-8befa48d9fee
+		summarizeBy: none
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Data Quality Import' = m
+		mode: import
+		source =
+				let
+				    CsvPath = ProjectRoot & "\\outputs\\data_quality.csv",
+				    Source = Csv.Document(File.Contents(CsvPath),[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Promoted,{{"metric", type text}, {"value", type number}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
